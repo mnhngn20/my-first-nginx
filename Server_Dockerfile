@@ -1,0 +1,14 @@
+FROM node:14
+
+WORKDIR /app
+
+COPY server/server.js .
+COPY server/index.html .
+COPY server/images ./images
+COPY server/package.json .
+
+RUN npm install
+
+EXPOSE 3000
+
+CMD ["node", "server.js"]

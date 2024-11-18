@@ -1,8 +1,37 @@
 version: "3"
 
 services:
+  app1:
+    build:
+      dockerfile: Server_Dockerfile
+    environment:
+      - APP_NAME=app1
+    ports:
+      - "3001:3000"
+
+  app2:
+    build:
+      dockerfile: Server_Dockerfile
+    environment:
+      - APP_NAME=app2
+    ports:
+      - "3002:3000"
+
+  app3:
+    build:
+      dockerfile: Server_Dockerfile
+    environment:
+      - APP_NAME=app3
+    ports:
+      - "3003:3000"
+
   my-fucking-nginx:
-    build: .
+    build:
+      dockerfile: LB_Dockerfile
     ports:
       - "443:443"
       - "80:80"
+    depends_on:
+      - app1
+      - app2
+      - app3
